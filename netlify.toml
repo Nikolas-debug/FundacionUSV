@@ -1,0 +1,79 @@
+# =============================================================================
+#  Configuración de Netlify — Fundación Unidad Sebastián de Vida
+#
+#  El sitio es estático (sin build de front-end): Netlify solo publica los
+#  archivos e instala las dependencias que usan las funciones.
+# =============================================================================
+
+[build]
+  publish   = "."
+  functions = "netlify/functions"
+  # No hay compilación del front-end; solo dependencias para las funciones.
+  command   = "npm install --omit=dev || true"
+
+[functions]
+  node_bundler = "esbuild"
+
+# -----------------------------------------------------------------------------
+#  Redirecciones
+#  El router va en modo hash (/#/ejes), así que no hacen falta reescrituras.
+#  Esta regla es solo por si alguien llega a /nosotros sin el #.
+# -----------------------------------------------------------------------------
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# -----------------------------------------------------------------------------
+#  Cabeceras
+# -----------------------------------------------------------------------------
+
+# Seguridad, para todo el sitio
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options        = "SAMEORIGIN"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    Permissions-Policy     = "geolocation=(), microphone=(), camera=()"
+
+# El HTML nunca se cachea: así un despliegue se ve de inmediato
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# El service worker tampoco: si se cachea, los cambios no llegan nunca
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# CSS y JS no llevan hash en el nombre: revalidamos siempre.
+# Netlify responde 304 si no cambiaron, así que casi no gasta ancho de banda.
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Las imágenes sí son estables: caché largo de verdad.
+# Si cambias una, súbela con otro nombre.
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

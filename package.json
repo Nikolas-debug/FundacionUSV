@@ -1,0 +1,13 @@
+{
+  "name": "fundacion-usv",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio web de la Fundación Unidad Sebastián de Vida",
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/blobs": "latest"
+  }
+}
