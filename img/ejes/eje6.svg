@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#02534A"/>
+  <circle cx="670" cy="120" r="180" fill="#FFFFFF" opacity="0.04"/>
+  <circle cx="120" cy="520" r="150" fill="#F3A713" opacity="0.06"/>
+  <g transform="translate(660,140)">
+    <circle r="24" fill="#F3A713"/>
+    <g stroke="#F3A713" stroke-width="6" stroke-linecap="round">
+      <path d="M0 -34 V -50"/><path d="M0 34 V 50"/>
+      <path d="M-34 0 H -50"/><path d="M34 0 H 50"/>
+      <path d="M-32 -32 L -44 -44"/><path d="M32 -32 L 44 -44"/>
+      <path d="M-32 32 L -44 44"/><path d="M32 32 L 44 44"/>
+    </g>
+  </g>
+  <path d="M212 392 A 188 188 0 0 1 588 392" fill="none" stroke="#F3A713" stroke-width="22" stroke-linecap="round"/>
+  <path d="M262 428 A 138 138 0 0 1 538 428" fill="none" stroke="#F3A713" stroke-width="12" stroke-linecap="round" opacity="0.45"/>
+  <path d="M244 504 H 556" stroke="#FFFFFF" stroke-width="8" opacity="0.28" stroke-linecap="round"/>
+  <circle cx="400" cy="336" r="42" fill="#FFFFFF"/>
+  <path d="M348 500 V 430 q0 -52 52 -52 q52 0 52 52 V 500 z" fill="#FFFFFF"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#02534A"/>
+  <circle cx="670" cy="120" r="180" fill="#FFFFFF" opacity="0.04"/>
+  <circle cx="120" cy="520" r="150" fill="#F3A713" opacity="0.06"/>
+  <g transform="translate(655,140)">
+    <circle r="24" fill="#F3A713"/>
+    <g stroke="#F3A713" stroke-width="6" stroke-linecap="round">
+      <path d="M0 -34 V -50"/><path d="M0 34 V 50"/>
+      <path d="M-34 0 H -50"/><path d="M34 0 H 50"/>
+      <path d="M-32 -32 L -44 -44"/><path d="M32 -32 L 44 -44"/>
+      <path d="M-32 32 L -44 44"/><path d="M32 32 L 44 44"/>
+    </g>
+  </g>
+  <circle cx="400" cy="360" r="124" fill="none" stroke="#FFFFFF" stroke-width="16" opacity="0.85"/>
+  <circle cx="400" cy="236" r="30" fill="#F3A713"/>
+  <circle cx="524" cy="360" r="30" fill="#F3A713"/>
+  <circle cx="400" cy="484" r="30" fill="#F3A713"/>
+  <circle cx="276" cy="360" r="30" fill="#F3A713"/>
+  <path d="M400 414 C 366 386 356 366 356 350 C 356 332 369 323 383 323 C 391 323 397 328 400 336 C 403 328 409 323 417 323 C 431 323 444 332 444 350 C 444 366 434 386 400 414 z" fill="#FFFFFF"/>
+</svg>
