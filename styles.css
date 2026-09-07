@@ -866,3 +866,91 @@ body.sin-scroll{ overflow: hidden; }
 @media (max-width: 575.98px){
   .foto-esqueleto{ height: 200px; }
 }
+
+/* ---------- Galería: filtros por eje ---------- */
+.filtros-ejes{
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  justify-content: center;
+  margin: 0 0 2rem;
+}
+.filtro-chip{
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .45rem .9rem;
+  border: 1.5px solid rgba(2, 83, 74, .18);
+  border-radius: 999px;
+  background: var(--blanco);
+  color: var(--verde-osc);
+  font-size: .88rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease,
+              border-color .18s ease, transform .18s ease;
+}
+.filtro-chip:hover{
+  border-color: var(--verde);
+  transform: translateY(-1px);
+}
+.filtro-chip.activo{
+  background: var(--verde);
+  border-color: var(--verde);
+  color: var(--blanco);
+}
+/* "Nuestras publicaciones": presente, pero sin competirle a los ejes */
+.filtro-chip.otras{ color: var(--gris-texto); }
+.filtro-chip.otras.activo{
+  background: var(--gris-texto);
+  border-color: var(--gris-texto);
+  color: var(--blanco);
+}
+.filtro-conteo{
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 .35rem;
+  border-radius: 999px;
+  background: rgba(2, 83, 74, .10);
+  font-size: .76rem;
+  font-weight: 700;
+}
+.filtro-chip.activo .filtro-conteo{ background: rgba(255, 255, 255, .22); }
+
+/* Distintivo del eje sobre la foto */
+.foto-eje{
+  position: absolute;
+  top: .7rem;
+  left: .7rem;
+  z-index: 1;
+  padding: .28rem .6rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .94);
+  color: var(--verde-osc);
+  font-size: .72rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(1, 58, 52, .18);
+}
+
+/* Eje dentro del visor */
+.visor-eje{
+  display: inline-block;
+  margin-bottom: .6rem;
+  padding: .25rem .65rem;
+  border-radius: 999px;
+  background: var(--dorado);
+  color: var(--verde-osc);
+  font-size: .76rem;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .filtro-chip:hover{ transform: none; }
+}
+@media (max-width: 575.98px){
+  .filtros-ejes{ gap: .4rem; margin-bottom: 1.5rem; }
+  .filtro-chip{ padding: .38rem .7rem; font-size: .8rem; }
+}
