@@ -66,14 +66,25 @@
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Las imágenes sí son estables: caché largo de verdad.
-# Si cambias una, súbela con otro nombre.
+# Imágenes: caché largo pero REVALIDABLE.
+#
+# Antes decía "max-age=31536000, immutable", que le ordena al navegador no
+# preguntar por el archivo durante un año. Con eso, cambiar el logo en su
+# mismo nombre no llegaba NUNCA a quien ya lo tenía: el service worker pedía
+# la imagen, el navegador le devolvía su copia vieja sin consultar al
+# servidor, y el worker la volvía a guardar. Ni subir VERSION lo arreglaba.
+# No reintroducir 'immutable' aquí a menos que los archivos lleven hash en
+# el nombre (logo.a1b2c3.png), que es el único caso en que es seguro.
+#
+# Con lo de abajo: se sirve al instante desde caché durante 1 día; entre 1 y
+# 30 días se sigue sirviendo al instante Y se revalida por detrás; pasados 30
+# días revalida antes de servir. Un 304 pesa unos cientos de bytes.
 [[headers]]
   for = "/img/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=2592000"
 
 [[headers]]
   for = "/favicon.ico"
   [headers.values]
-    Cache-Control = "public, max-age=604800"
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=2592000"
