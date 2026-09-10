@@ -1,24 +1,5 @@
-/* =========================================================================
-   Netlify Function: publicaciones de Instagram
-
-   Por qué existe: el token de Instagram dura 60 días y NO puede vivir en el
-   navegador (cualquiera lo vería en el inspector). Esta función lo guarda del
-   lado del servidor, consulta la API y le entrega al sitio solo lo publicable.
-
-   Renovación automática: cuando el token pasa de 30 días, se renueva solo y
-   el nuevo queda guardado en Netlify Blobs. Mientras la web reciba visitas al
-   menos una vez cada 60 días, el token nunca vence. Si Blobs no está
-   disponible, la función sigue funcionando con el token de la variable de
-   entorno (sin renovar).
-
-   Variables de entorno necesarias (Netlify → Site settings → Environment):
-     IG_TOKEN  — token de larga duración de Instagram
-
-   Ruta pública:  /.netlify/functions/instagram
-   ========================================================================= */
-
-const CUANTOS = 12;                       // publicaciones a traer
-const DIAS_PARA_RENOVAR = 30;             // renueva a partir de este umbral
+const CUANTOS = 12;            
+const DIAS_PARA_RENOVAR = 30;             
 const MS_POR_DIA = 24 * 60 * 60 * 1000;
 
 /* ---- Almacén del token (Netlify Blobs, opcional) ---- */
@@ -82,7 +63,6 @@ function responder(cuerpo, { estado = 200, segundos = 3600 } = {}) {
     status: estado,
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
-      // El CDN de Netlify guarda la respuesta: la función casi no se ejecuta
       'Cache-Control': `public, max-age=300, s-maxage=${segundos}, stale-while-revalidate=86400`
     }
   });
@@ -126,7 +106,7 @@ export default async () => {
 
     const posts = (datos.data || [])
       .map(normalizar)
-      .filter((p) => p.imagen);   // descartamos lo que no tenga imagen utilizable
+      .filter((p) => p.imagen);
 
     return responder({ ok: true, posts });
 

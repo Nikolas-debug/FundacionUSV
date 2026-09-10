@@ -4,17 +4,23 @@
    ========================================================= */
 
 :root{
-  --verde:        #02534A;
-  --verde-osc:    #013A34;
-  --verde-claro:  #0A6B60;
-  --dorado:       #F3A713;
-  --dorado-osc:   #D18E07;
+  /* ---- Paleta tomada del logo (muestreada del archivo, no inventada) ----
+     El oliva es el color ancla. El dorado brilla SOBRE el oliva; sobre
+     blanco no alcanza contraste legible, y para eso existe --dorado-osc.
+     El verde hoja es decorativo: da 3.2:1 sobre blanco, así que sirve para
+     bordes, iconos y texto grande, pero NO para texto de cuerpo. */
+  --verde:        #2B381A;   /* fondo del círculo del logo */
+  --verde-osc:    #1A230F;   /* profundidad: degradados y hover */
+  --verde-claro:  #7C9A2A;   /* verde hoja — solo decorativo */
+  --dorado:       #EEC043;   /* dorado del sol */
+  --dorado-osc:   #8A6A12;   /* ocre: dorado que sí se lee sobre blanco */
+  --crema:        #F0E0C6;   /* crema de la figura y los textos del logo */
   --blanco:       #FFFFFF;
-  --hueso:        #F7F7F5;
-  --gris-texto:   #4A5A57;
+  --hueso:        #FAF6EE;   /* blanco cálido para secciones alternas */
+  --gris-texto:   #4A4F3D;   /* gris con tinte oliva */
 
   --radio:  16px;
-  --sombra: 0 6px 24px rgba(2, 83, 74, .10);
+  --sombra: 0 6px 24px rgba(43, 56, 26, .10);
 }
 
 *{ scroll-behavior: smooth; }
@@ -48,7 +54,7 @@ a{ text-decoration: none; }
 /* ---------- Header / Nav ---------- */
 .site-header{
   background: var(--blanco);
-  box-shadow: 0 2px 12px rgba(2, 83, 74, .08);
+  box-shadow: 0 2px 12px rgba(43, 56, 26, .08);
 }
 .brand-logo{
   width: 54px;
@@ -84,10 +90,10 @@ a{ text-decoration: none; }
 .navbar-nav .nav-link:focus{ color: var(--dorado-osc); }
 
 .navbar-toggler{
-  border-color: rgba(2, 83, 74, .25);
+  border-color: rgba(43, 56, 26, .25);
   padding: .35rem .6rem;
 }
-.navbar-toggler:focus{ box-shadow: 0 0 0 .2rem rgba(243, 167, 19, .35); }
+.navbar-toggler:focus{ box-shadow: 0 0 0 .2rem rgba(238, 192, 67, .35); }
 .navbar-toggler-icon{
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%2302534A' stroke-width='2.5' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
@@ -102,7 +108,7 @@ a{ text-decoration: none; }
   width: min(320px, 78vw);
   height: auto;
   border-radius: 50%;
-  border: 3px solid rgba(243, 167, 19, .55);
+  border: 3px solid rgba(238, 192, 67, .55);
   box-shadow: 0 12px 40px rgba(0, 0, 0, .3),
               0 0 0 14px rgba(255, 255, 255, .05);
 }
@@ -191,7 +197,7 @@ a{ text-decoration: none; }
   flex-direction: column;
   overflow: hidden;
   background: var(--blanco);
-  border: 1px solid rgba(2, 83, 74, .10);
+  border: 1px solid rgba(43, 56, 26, .10);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
   cursor: pointer;
@@ -200,10 +206,10 @@ a{ text-decoration: none; }
 .eje-card:hover,
 .eje-card:focus-visible{
   transform: translateY(-6px);
-  box-shadow: 0 16px 38px rgba(2, 83, 74, .20);
+  box-shadow: 0 16px 38px rgba(43, 56, 26, .20);
   outline: none;
 }
-.eje-card:focus-visible{ box-shadow: 0 0 0 3px rgba(243, 167, 19, .55), 0 16px 38px rgba(2, 83, 74, .20); }
+.eje-card:focus-visible{ box-shadow: 0 0 0 3px rgba(238, 192, 67, .55), 0 16px 38px rgba(43, 56, 26, .20); }
 
 .eje-img{
   position: relative;
@@ -232,7 +238,7 @@ a{ text-decoration: none; }
   color: var(--verde-osc);
   font-weight: 800;
   font-size: 1.05rem;
-  box-shadow: 0 6px 18px rgba(1, 58, 52, .3);
+  box-shadow: 0 6px 18px rgba(26, 35, 15, .3);
 }
 
 .eje-body{
@@ -270,7 +276,7 @@ a{ text-decoration: none; }
   display: grid;
   place-items: center;
   padding: 1.25rem;
-  background: rgba(1, 58, 52, .88);
+  background: rgba(26, 35, 15, .88);
   backdrop-filter: blur(3px);
 }
 
@@ -362,7 +368,7 @@ a{ text-decoration: none; }
 .enlace-pendiente{
   display: inline-block;
   padding: .55rem 1.1rem;
-  border: 1.5px dashed rgba(2, 83, 74, .35);
+  border: 1.5px dashed rgba(43, 56, 26, .35);
   border-radius: 999px;
   font-size: .88rem;
   color: var(--gris-texto);
@@ -401,7 +407,7 @@ a{ text-decoration: none; }
   height: 100%;
   padding: 2rem 1.25rem;
   background: var(--blanco);
-  border: 1px solid rgba(2, 83, 74, .10);
+  border: 1px solid rgba(43, 56, 26, .10);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
   text-align: center;
@@ -409,7 +415,7 @@ a{ text-decoration: none; }
 }
 .contact-card:hover{
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(2, 83, 74, .16);
+  box-shadow: 0 12px 32px rgba(43, 56, 26, .16);
 }
 .contact-ico{
   display: grid;
@@ -453,7 +459,7 @@ a{ text-decoration: none; }
   height: 104px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(243, 167, 19, .5);
+  border: 2px solid rgba(238, 192, 67, .5);
 }
 .footer-motto{
   font-family: 'Dancing Script', cursive;
@@ -476,7 +482,7 @@ a{ text-decoration: none; }
 @media (max-width: 991.98px){
   .navbar-collapse{
     padding: .75rem 0 .5rem;
-    border-top: 1px solid rgba(2, 83, 74, .12);
+    border-top: 1px solid rgba(43, 56, 26, .12);
     margin-top: .75rem;
   }
   .navbar-nav .nav-link{ padding-inline: 0; }
@@ -496,7 +502,7 @@ a{ text-decoration: none; }
 /* Enlace activo en el nav */
 .navbar-nav .nav-link.router-link-exact-active{
   color: var(--dorado-osc);
-  background: rgba(243, 167, 19, .12);
+  background: rgba(238, 192, 67, .12);
 }
 .navbar-brand.router-link-exact-active{ text-decoration: none; }
 
@@ -570,7 +576,7 @@ a{ text-decoration: none; }
 }
 .foto-card:hover{
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(2, 83, 74, .18);
+  box-shadow: 0 12px 32px rgba(43, 56, 26, .18);
 }
 .foto-card:hover img{ transform: scale(1.05); }
 .foto-lupa{
@@ -600,7 +606,7 @@ body.sin-scroll{ overflow: hidden; }
   display: grid;
   place-items: center;
   padding: 1.5rem;
-  background: rgba(1, 58, 52, .92);
+  background: rgba(26, 35, 15, .92);
 }
 .visor-caja{
   width: min(880px, 94vw);
@@ -646,7 +652,7 @@ body.sin-scroll{ overflow: hidden; }
 /* ---------- Formulario ---------- */
 .form-card{
   background: var(--blanco);
-  border: 1px solid rgba(2, 83, 74, .10);
+  border: 1px solid rgba(43, 56, 26, .10);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
   padding: 1.75rem;
@@ -670,7 +676,7 @@ body.sin-scroll{ overflow: hidden; }
   font: inherit;
   color: var(--gris-texto);
   background: var(--hueso);
-  border: 1.5px solid rgba(2, 83, 74, .15);
+  border: 1.5px solid rgba(43, 56, 26, .15);
   border-radius: 10px;
   transition: border-color .15s ease, box-shadow .15s ease;
 }
@@ -679,7 +685,7 @@ body.sin-scroll{ overflow: hidden; }
   outline: none;
   background: var(--blanco);
   border-color: var(--dorado);
-  box-shadow: 0 0 0 3px rgba(243, 167, 19, .2);
+  box-shadow: 0 0 0 3px rgba(238, 192, 67, .2);
 }
 .campo .con-error{ border-color: #c0392b; }
 .msg-error{
@@ -701,7 +707,7 @@ body.sin-scroll{ overflow: hidden; }
   border-radius: 10px;
   font-size: .92rem;
 }
-.aviso.ok{    background: rgba(2, 83, 74, .10);  color: var(--verde); }
+.aviso.ok{    background: rgba(43, 56, 26, .10);  color: var(--verde); }
 .aviso.error{ background: rgba(192, 57, 43, .10); color: #c0392b; }
 
 @media (max-width: 575.98px){
@@ -726,7 +732,7 @@ body.sin-scroll{ overflow: hidden; }
   font-weight: 700;
   font-size: .92rem;
   cursor: pointer;
-  box-shadow: 0 10px 28px rgba(1, 58, 52, .35);
+  box-shadow: 0 10px 28px rgba(26, 35, 15, .35);
   animation: subir .3s ease;
 }
 .btn-instalar:hover{ background: var(--dorado-osc); }
@@ -772,7 +778,7 @@ body.sin-scroll{ overflow: hidden; }
   gap: .75rem;
   padding: 2rem 1.6rem;
   background: var(--blanco);
-  border: 1px solid rgba(2, 83, 74, .10);
+  border: 1px solid rgba(43, 56, 26, .10);
   border-top: 4px solid var(--dorado);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
@@ -780,7 +786,7 @@ body.sin-scroll{ overflow: hidden; }
 }
 .tarjeta-nosotros:hover{
   transform: translateY(-4px);
-  box-shadow: 0 14px 34px rgba(2, 83, 74, .16);
+  box-shadow: 0 14px 34px rgba(43, 56, 26, .16);
 }
 .tarjeta-icono{
   display: grid;
@@ -788,7 +794,7 @@ body.sin-scroll{ overflow: hidden; }
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: rgba(243, 167, 19, .16);
+  background: rgba(238, 192, 67, .16);
   color: var(--dorado-osc);
   font-size: 1.3rem;
 }
@@ -842,7 +848,7 @@ body.sin-scroll{ overflow: hidden; }
   right: 0;
   bottom: 0;
   padding: 2.5rem .9rem .8rem;
-  background: linear-gradient(to top, rgba(1, 58, 52, .92), transparent);
+  background: linear-gradient(to top, rgba(26, 35, 15, .92), transparent);
   color: var(--blanco);
   font-size: .82rem;
   line-height: 1.35;
@@ -852,7 +858,7 @@ body.sin-scroll{ overflow: hidden; }
 .foto-esqueleto{
   height: 240px;
   border-radius: var(--radio);
-  background: linear-gradient(100deg, rgba(2,83,74,.08) 30%, rgba(2,83,74,.16) 50%, rgba(2,83,74,.08) 70%);
+  background: linear-gradient(100deg, rgba(43, 56, 26,.08) 30%, rgba(43, 56, 26,.16) 50%, rgba(43, 56, 26,.08) 70%);
   background-size: 220% 100%;
   animation: brillo 1.4s infinite linear;
 }
@@ -880,7 +886,7 @@ body.sin-scroll{ overflow: hidden; }
   align-items: center;
   gap: .45rem;
   padding: .45rem .9rem;
-  border: 1.5px solid rgba(2, 83, 74, .18);
+  border: 1.5px solid rgba(43, 56, 26, .18);
   border-radius: 999px;
   background: var(--blanco);
   color: var(--verde-osc);
@@ -914,7 +920,7 @@ body.sin-scroll{ overflow: hidden; }
   height: 1.35rem;
   padding: 0 .35rem;
   border-radius: 999px;
-  background: rgba(2, 83, 74, .10);
+  background: rgba(43, 56, 26, .10);
   font-size: .76rem;
   font-weight: 700;
 }
@@ -932,7 +938,7 @@ body.sin-scroll{ overflow: hidden; }
   color: var(--verde-osc);
   font-size: .72rem;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(1, 58, 52, .18);
+  box-shadow: 0 2px 8px rgba(26, 35, 15, .18);
 }
 
 /* Eje dentro del visor */

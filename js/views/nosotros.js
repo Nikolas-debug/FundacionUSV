@@ -7,7 +7,7 @@ const VistaNosotros = {
           clave: 'mision',
           etiqueta: 'Misión',
           icono: '◈',
-          texto: 'Promover el bienestar integral de mujeres, madres cabeza de hogar, jóvenes y familias en situación de vulnerabilidad, a través de programas de empoderamiento económico, acompañamiento emocional y desarrollo social sostenible.'
+          texto: 'Acompañamos a mujeres, jóvenes, niños y adultos mayores en doce frentes con procesos sostenidos que buscan mejorar la calidad de vida individual y en sociedad. Es fe que se demuestra en obra.'
         },
         {
           clave: 'vision',
@@ -31,8 +31,8 @@ const VistaNosotros = {
         <div class="section-head">
           <h2 class="section-title">Nosotros</h2>
           <p class="section-sub">
-            Promovemos el bienestar integral de mujeres, madres cabeza de hogar, jóvenes y familias
-            mediante programas de empoderamiento, acompañamiento emocional y sostenibilidad.
+            Acompañamos a las familias del Caribe colombiano en doce frentes de trabajo,
+            con procesos que sostienen en el tiempo.
           </p>
         </div>
 

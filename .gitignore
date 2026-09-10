@@ -1,39 +1,26 @@
-# =========================================================
-#  Fundación Unidad Sebastián de Vida
-# =========================================================
 
-# ---- Secretos: nunca al repositorio -----------------------
-# Aquí vive IG_TOKEN cuando trabajas en local con `netlify dev`.
-# Si esto se sube, cualquiera puede publicar en el Instagram
-# de la fundación. En producción el token va en Netlify, en
-# Site configuration → Environment variables.
 .env
 .env.*
 !.env.example
 
-# ---- Dependencias -----------------------------------------
-# Solo las usan las funciones. Netlify las instala al desplegar.
+
 node_modules/
 package-lock.json.bak
 
-# ---- Netlify ----------------------------------------------
 .netlify/            # carpeta local de la CLI (incluye credenciales del sitio)
 
-# ---- Sistema operativo ------------------------------------
+
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 .DS_Store
 
-# ---- Editores ---------------------------------------------
+
 .vscode/
 .idea/
 *.swp
 *~
 
-# ---- Trabajo temporal -------------------------------------
-_backup/
-Claude outputs/
 *.log
 npm-debug.log*

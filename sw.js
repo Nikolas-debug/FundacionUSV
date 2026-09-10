@@ -3,7 +3,7 @@
    El caché es mínimo: solo la cáscara de la app, para que abra sin conexión.
    Sube el número de VERSION cada vez que publiques cambios. */
 
-const VERSION = 'usv-v3';
+const VERSION = 'usv-v4';
 
 const CASCARA = [
   './',
