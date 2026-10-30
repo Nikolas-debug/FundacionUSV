@@ -1,4 +1,4 @@
-const VERSION = 'usv-v6';
+const VERSION = 'usv-v7';
 
 const CASCARA = [
   './',

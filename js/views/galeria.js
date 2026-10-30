@@ -120,13 +120,19 @@ const VistaGaleria = {
       }
     },
 
-    abrir(foto) {
+    abrir(foto, evento) {
+      this._origen = evento && evento.currentTarget;   // para devolverle el foco al cerrar
       this.activa = foto;
       document.body.classList.add('sin-scroll');
+      this.$nextTick(() => {
+        if (this.$refs.cerrar) this.$refs.cerrar.focus();
+      });
     },
     cerrar() {
+      if (!this.activa) return;
       this.activa = null;
       document.body.classList.remove('sin-scroll');
+      if (this._origen) this._origen.focus();
     }
   },
 
@@ -172,30 +178,34 @@ const VistaGaleria = {
           </button>
         </div>
 
-        <!-- Cargando -->
-        <div v-if="cargando" class="row g-4" aria-hidden="true">
+        <!-- Al llegar las publicaciones o al cambiar de filtro, la grilla entra
+             con un fundido en vez de cambiar de golpe (la clave fuerza el relevo) -->
+        <transition name="relevo">
+        <div v-if="cargando" key="cargando" class="row g-4" aria-hidden="true">
           <div class="col-sm-6 col-lg-4" v-for="n in 3" :key="n">
             <div class="foto-esqueleto"></div>
           </div>
         </div>
 
-        <!-- Publicaciones -->
-        <div v-else class="row g-4">
+        <div v-else :key="'fotos-' + (filtroActivo || 'todas')" class="row g-4">
           <div class="col-sm-6 col-lg-4" v-for="foto in fotosVisibles" :key="foto.id">
-            <button type="button" class="foto-card" @click="abrir(foto)">
+            <button type="button" class="foto-card" @click="abrir(foto, $event)">
               <img :src="foto.imagen" :alt="resumen(foto.descripcion) || 'Publicación de la fundación'" loading="lazy">
               <span class="foto-eje" v-if="!filtroActivo && foto.eje.num !== '00'">{{ foto.eje.etiqueta }}</span>
-              <span class="foto-lupa" aria-hidden="true">⤢</span>
+              <span class="foto-lupa" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></svg></span>
               <span class="foto-pie" v-if="foto.descripcion">{{ resumen(foto.descripcion) }}</span>
             </button>
           </div>
         </div>
+        </transition>
 
       </div>
 
       <!-- Visor -->
-      <div class="visor" v-if="activa" @click.self="cerrar">
-        <button type="button" class="visor-cerrar" @click="cerrar" aria-label="Cerrar">×</button>
+      <transition name="modal">
+      <div class="visor" v-if="activa" @click.self="cerrar"
+           role="dialog" aria-modal="true" aria-label="Publicación de la galería">
+        <button type="button" class="visor-cerrar" ref="cerrar" @click="cerrar" aria-label="Cerrar">×</button>
         <div class="visor-caja">
           <img :src="activa.imagen" :alt="resumen(activa.descripcion) || 'Publicación'">
           <div class="visor-texto" v-if="activa.descripcion || activa.enlace">
@@ -209,6 +219,7 @@ const VistaGaleria = {
           </div>
         </div>
       </div>
+      </transition>
     </section>
   `
 };

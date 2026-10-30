@@ -50,6 +50,11 @@ createApp({
   },
 
   methods: {
+    // El router usa el hash, así que el ancla #contenido no sirve: se mueve el foco a mano
+    saltarAlContenido() {
+      document.getElementById('contenido').focus();
+    },
+
     async instalar() {
       if (!this.promptInstalar) return;
       this.promptInstalar.prompt();

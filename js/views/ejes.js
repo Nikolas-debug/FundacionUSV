@@ -226,7 +226,8 @@ const VistaEjes = {
   },
 
   methods: {
-    abrir(eje) {
+    abrir(eje, evento) {
+      this._origen = evento && evento.currentTarget;   // para devolverle el foco al cerrar
       this.abierto = eje;
       document.body.classList.add('sin-scroll');
       this.$nextTick(() => {
@@ -234,8 +235,10 @@ const VistaEjes = {
       });
     },
     cerrar() {
+      if (!this.abierto) return;
       this.abierto = null;
       document.body.classList.remove('sin-scroll');
+      if (this._origen) this._origen.focus();
     }
   },
 
@@ -257,26 +260,20 @@ const VistaEjes = {
           <p class="section-sub">Los frentes de trabajo con los que la fundación llega a la comunidad.</p>
         </div>
 
-        <div class="row g-4 justify-content-center">
-          <div class="col-sm-6 col-lg-4 col-xxl-3" v-for="eje in ejes" :key="eje.num">
-            <article class="eje-card h-100" tabindex="0" role="button"
-                     :aria-label="'Ver detalle de ' + eje.titulo"
-                     @click="abrir(eje)" @keydown.enter="abrir(eje)" @keydown.space.prevent="abrir(eje)">
-
-              <div class="eje-img">
-                <img :src="eje.imagen" :alt="eje.alt" loading="lazy">
-              </div>
-              <span class="eje-num">{{ eje.num }}</span>
-
-              <div class="eje-body">
-                <h3 class="eje-title">{{ eje.titulo }}</h3>
-                <p class="eje-resumen">{{ eje.resumen }}</p>
-                <span class="eje-mas">Conocer más <span aria-hidden="true">→</span></span>
-              </div>
-
-            </article>
-          </div>
-        </div>
+        <ol class="ejes-indice">
+          <li v-for="eje in ejes" :key="eje.num">
+            <button type="button" class="eje-fila" @click="abrir(eje, $event)">
+              <span class="eje-num" aria-hidden="true">{{ eje.num }}</span>
+              <span class="eje-texto">
+                <span class="eje-title">{{ eje.titulo }}</span>
+                <span class="eje-resumen">{{ eje.resumen }}</span>
+              </span>
+              <span class="eje-thumb" aria-hidden="true">
+                <img :src="eje.imagen" alt="" loading="lazy">
+              </span>
+            </button>
+          </li>
+        </ol>
 
       </div>
 
