@@ -1,4 +1,4 @@
-const API_INSTAGRAM = '/.netlify/functions/instagram';
+const API_INSTAGRAM = '/api/instagram';
 const CLAVE_CACHE = 'usv-instagram';
 const MINUTOS_CACHE = 30;
 

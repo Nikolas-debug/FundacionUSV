@@ -1,0 +1,35 @@
+# Cabeceras de Cloudflare Pages. La política de caché está explicada en CLAUDE.md.
+#
+# /img/* NO lleva 'immutable': los archivos no tienen hash en el nombre y,
+# con immutable, un logo reemplazado en su mismo nombre no llegaba nunca.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+
+# Pages sirve el index en / (y redirige /index.html a /): van los dos
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/styles.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/manifest.json
+  Cache-Control: public, max-age=3600
+
+/img/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=2592000
+
+/favicon.ico
+  Cache-Control: public, max-age=86400, stale-while-revalidate=2592000

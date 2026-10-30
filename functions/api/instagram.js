@@ -2,19 +2,14 @@ const CUANTOS = 12;
 const DIAS_PARA_RENOVAR = 30;             
 const MS_POR_DIA = 24 * 60 * 60 * 1000;
 
-/* ---- Almacén del token (Netlify Blobs, opcional) ---- */
-async function abrirAlmacen() {
-  try {
-    const { getStore } = await import('@netlify/blobs');
-    return getStore('instagram');
-  } catch (err) {
-    console.warn('Netlify Blobs no disponible; se usará solo IG_TOKEN:', err.message);
-    return null;
-  }
+/* ---- Almacén del token (Workers KV, binding IG_STORE, opcional) ---- */
+function abrirAlmacen(env) {
+  if (!env.IG_STORE) console.warn('KV IG_STORE no disponible; se usará solo IG_TOKEN');
+  return env.IG_STORE || null;
 }
 
-async function leerToken(almacen) {
-  const semilla = process.env.IG_TOKEN;
+async function leerToken(almacen, env) {
+  const semilla = env.IG_TOKEN;
   if (!almacen) return { token: semilla, obtenido: Date.now(), persistible: false };
 
   try {
@@ -29,7 +24,7 @@ async function leerToken(almacen) {
 async function guardarToken(almacen, token) {
   if (!almacen) return;
   try {
-    await almacen.setJSON('token', { token, obtenido: Date.now() });
+    await almacen.put('token', JSON.stringify({ token, obtenido: Date.now() }));
   } catch (err) {
     console.warn('No se pudo guardar el token renovado:', err.message);
   }
@@ -68,8 +63,8 @@ function responder(cuerpo, { estado = 200, segundos = 3600 } = {}) {
   });
 }
 
-export default async () => {
-  if (!process.env.IG_TOKEN) {
+export async function onRequestGet({ env }) {
+  if (!env.IG_TOKEN) {
     return responder(
       { ok: false, motivo: 'Falta la variable de entorno IG_TOKEN', posts: [] },
       { segundos: 60 }
@@ -77,8 +72,8 @@ export default async () => {
   }
 
   try {
-    const almacen = await abrirAlmacen();
-    let { token, obtenido, persistible } = await leerToken(almacen);
+    const almacen = abrirAlmacen(env);
+    let { token, obtenido, persistible } = await leerToken(almacen, env);
 
     // ¿Toca renovar?
     if (persistible && Date.now() - (obtenido || 0) > DIAS_PARA_RENOVAR * MS_POR_DIA) {
@@ -114,4 +109,4 @@ export default async () => {
     console.error('Fallo consultando Instagram:', err);
     return responder({ ok: false, motivo: err.message, posts: [] }, { segundos: 60 });
   }
-};
+}

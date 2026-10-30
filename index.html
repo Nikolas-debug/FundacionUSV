@@ -28,22 +28,6 @@
 </head>
 <body>
 
-<!-- ===================================================================
-     Copia estática del formulario, oculta y fuera de Vue.
-     Netlify analiza el HTML al desplegar para registrar los formularios
-     y no ve lo que Vue dibuja en el navegador: esta copia es la que
-     detecta. Los name de los campos deben coincidir con los del
-     formulario real de js/views/contacto.js.
-     =================================================================== -->
-<form name="contacto" data-netlify="true" netlify-honeypot="bot-field" hidden>
-  <input type="hidden" name="form-name" value="contacto">
-  <input type="text" name="nombre">
-  <input type="email" name="correo">
-  <input type="tel" name="telefono">
-  <textarea name="mensaje"></textarea>
-  <input type="text" name="bot-field">
-</form>
-
 <div id="app">
 
   <!-- ============ HEADER + NAV ============ -->

@@ -1,4 +1,4 @@
-const VERSION = 'usv-v5';
+const VERSION = 'usv-v6';
 
 const CASCARA = [
   './',
@@ -112,7 +112,7 @@ self.addEventListener('fetch', (evento) => {
 
   const url = new URL(req.url);
   if (url.origin !== self.location.origin) return;   // el CDN y Instagram pasan de largo
-  if (url.pathname.startsWith('/.netlify/')) return; // funciones y formularios: cosa de Netlify
+  if (url.pathname.startsWith('/api/')) return;      // funciones de Cloudflare: siempre a red
 
   evento.respondWith(
     esImagen(req) ? cachePrimeroYActualiza(req, evento) : redPrimero(req)

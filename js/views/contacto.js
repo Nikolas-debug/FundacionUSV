@@ -1,13 +1,8 @@
 /* Vista: Contacto — datos + formulario
 
-   El envío va a Netlify Forms: se hace POST a la propia raíz del sitio con
-   el cuerpo codificado como formulario y el campo form-name. Netlify lo
-   registra al desplegar gracias a la copia oculta que está en index.html.
-
-   Si el POST falla (por ejemplo abriendo el index con file://, donde no hay
-   Netlify), caemos al cliente de correo para no dejar al visitante sin salida.
+   No hay backend: al enviar se abre el cliente de correo del visitante con
+   el mensaje ya armado. WhatsApp queda como alternativa directa.
 */
-const NOMBRE_FORM = 'contacto';
 
 const VistaContacto = {
   data() {
@@ -15,8 +10,6 @@ const VistaContacto = {
       form: { nombre: '', correo: '', telefono: '', mensaje: '' },
       trampa: '',   // honeypot: si un bot lo llena, descartamos el envío
       errores: {},
-      enviando: false,
-      estado: null   // 'ok' | 'error' | null
     };
   },
   methods: {
@@ -45,38 +38,10 @@ const VistaContacto = {
         'mailto:fundacionusv@gmail.com?subject=' + asunto + '&body=' + cuerpo;
     },
 
-    async enviar() {
-      this.estado = null;
+    enviar() {
       if (!this.validar()) return;
       if (this.trampa) return;   // bot
-
-      this.enviando = true;
-      try {
-        const datos = new URLSearchParams({
-          'form-name': NOMBRE_FORM,
-          'bot-field': '',
-          nombre: this.form.nombre,
-          correo: this.form.correo,
-          telefono: this.form.telefono,
-          mensaje: this.form.mensaje
-        });
-
-        const r = await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: datos.toString()
-        });
-        if (!r.ok) throw new Error('respuesta ' + r.status);
-
-        this.estado = 'ok';
-        this.form = { nombre: '', correo: '', telefono: '', mensaje: '' };
-        this.errores = {};
-      } catch (err) {
-        console.warn('Netlify Forms no disponible, abriendo el correo:', err);
-        this.abrirCorreo();
-      } finally {
-        this.enviando = false;
-      }
+      this.abrirCorreo();
     }
   },
   template: `
@@ -154,16 +119,11 @@ const VistaContacto = {
               </p>
 
               <div class="form-pie">
-                <button class="btn btn-brand" type="submit" :disabled="enviando">
-                  {{ enviando ? 'Enviando…' : 'Enviar mensaje' }}
-                </button>
+                <button class="btn btn-brand" type="submit">Enviar mensaje</button>
                 <a class="btn btn-brand-outline"
                    href="https://wa.me/573103538881?text=Hola%20Fundaci%C3%B3n%20Unidad%20Sebasti%C3%A1n%20de%20Vida"
                    target="_blank" rel="noopener">WhatsApp</a>
               </div>
-
-              <p class="aviso ok"    v-if="estado === 'ok'">¡Gracias! Recibimos tu mensaje y te responderemos pronto.</p>
-              <p class="aviso error" v-if="estado === 'error'">No pudimos enviar el mensaje. Escríbenos por WhatsApp o al correo.</p>
 
             </form>
           </div>
