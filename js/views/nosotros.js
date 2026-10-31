@@ -52,11 +52,6 @@ const VistaNosotros = {
           </div>
         </div>
 
-        <div class="nosotros-pie">
-          <p>¿Quieres acompañarnos en este trabajo?</p>
-          <router-link class="btn btn-brand" to="/contacto">Hablemos</router-link>
-        </div>
-
       </div>
     </section>
   `

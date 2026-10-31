@@ -7,8 +7,10 @@
 node_modules/
 package-lock.json.bak
 
-.dev.vars            # token local de wrangler
-.wrangler/           # estado local de wrangler (KV simulado)
+# token local de wrangler
+.dev.vars
+# estado local de wrangler (KV simulado)
+.wrangler/
 
 
 Thumbs.db
@@ -27,3 +29,4 @@ $RECYCLE.BIN/
 npm-debug.log*
 
 *.md
+.claude/

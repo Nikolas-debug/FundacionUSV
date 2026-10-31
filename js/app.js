@@ -8,7 +8,7 @@ const { createRouter, createWebHashHistory } = VueRouter;
    3) agrega la ruta aquí y el enlace en el nav
 ------------------------------------------------------------ */
 const routes = [
-  { path: '/',          name: 'inicio',   component: VistaInicio,   meta: { titulo: 'Inicio' } },
+  { path: '/',          name: 'inicio',   component: VistaInicio,   meta: {} },   // sin título: queda "Fundación… — Fe que transforma", el que ve Google
   { path: '/nosotros',  name: 'nosotros', component: VistaNosotros, meta: { titulo: 'Nosotros' } },
   { path: '/ejes',      name: 'ejes',     component: VistaEjes,     meta: { titulo: 'Ejes estratégicos' } },
   { path: '/galeria',   name: 'galeria',  component: VistaGaleria,  meta: { titulo: 'Galería' } },

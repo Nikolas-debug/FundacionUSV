@@ -63,7 +63,21 @@ function responder(cuerpo, { estado = 200, segundos = 3600 } = {}) {
   });
 }
 
-export async function onRequestGet({ env }) {
+export async function onRequestGet({ request, env, waitUntil }) {
+  // Cloudflare no cachea las respuestas de una función: se guardan a mano para que
+  // Instagram se consulte como mucho una vez por s-maxage y no en cada visita.
+  // Clave fija, sin la query: si no, ?x=1, ?x=2... se saltarían la caché.
+  const cache = caches.default;
+  const clave = new Request(new URL('/api/instagram', request.url));
+  const guardada = await cache.match(clave);
+  if (guardada) return guardada;
+
+  const res = await consultar(env);
+  waitUntil(cache.put(clave, res.clone()));
+  return res;
+}
+
+async function consultar(env) {
   if (!env.IG_TOKEN) {
     return responder(
       { ok: false, motivo: 'Falta la variable de entorno IG_TOKEN', posts: [] },
