@@ -138,11 +138,24 @@ const VistaGaleria = {
 
   mounted() {
     this.cargar();
-    this._esc = (e) => { if (e.key === 'Escape') this.cerrar(); };
-    window.addEventListener('keydown', this._esc);
+    this._teclas = (e) => {
+      if (!this.activa) return;
+      if (e.key === 'Escape') return this.cerrar();
+      if (e.key !== 'Tab') return;
+      // Atrapa el foco en el visor: del último salta al primero, y al revés con Shift
+      const caja = this.$el.querySelector('[role=dialog]');
+      const enfocables = caja.querySelectorAll('button, a[href]');
+      const primero = enfocables[0], ultimo = enfocables[enfocables.length - 1];
+      const actual = document.activeElement;
+      if (!caja.contains(actual) || actual === (e.shiftKey ? primero : ultimo)) {
+        e.preventDefault();
+        (e.shiftKey ? ultimo : primero).focus();
+      }
+    };
+    window.addEventListener('keydown', this._teclas);
   },
   unmounted() {
-    window.removeEventListener('keydown', this._esc);
+    window.removeEventListener('keydown', this._teclas);
     document.body.classList.remove('sin-scroll');
   },
 
